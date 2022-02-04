@@ -1,0 +1,32 @@
+function  x2=cuadraticas_y_polinomios(x,y,m)
+n=length(x);
+
+if n!=length(y)
+  msgID = 'AJUSTES CON ECUQACIONES NO LINEALES  :condicion';
+  msg = 'Error: No tiene la misma dimension ';
+  
+  error(msgID,msg)
+else
+  for i=1:m+1
+   for j = 1: i
+     k = i + j-2;
+     ad = 0;
+    for l = 1: n
+      ad = ad + x(l)^k;
+    end
+    a(i,j)=ad;
+    a(j,i)=ad;
+   end
+   ad = 0;
+   for l = 1: n
+    ad = ad + y(l)*x(l)^(i-1);
+   end
+   a(i,m+2) = ad;
+ end
+
+A=a(:,1:length(a)-1);
+b=a(:,length(a));
+x2=gaussjordan(A,b);
+x2=x2';
+
+end
