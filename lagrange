@@ -1,0 +1,22 @@
+function p=lagrange(xi,yi)
+n=length(xi);
+syms x;
+
+p=0;
+if n!=length(yi)
+  msgID = 'AJUSTES CON ECUQACIONES NO LINEALES  :condicion';
+  msg = 'Error: No tiene la misma dimension ';
+  
+  error(msgID,msg)
+else
+  for i=1:n;
+    l=yi(i);
+    for j=1:n;
+      if i!=j
+        l=l*(x-xi(j))/(xi(i)-xi(j));
+      end
+    end
+  p=p+l;
+  end
+  p=expand(p);
+end
